@@ -1,0 +1,131 @@
+<section class="sheet-body">
+    <h3>Builder</h3>
+    {{#each character_level}}
+    <button type="button" class="level-accordion">Level {{this}}</button>
+    <section style="display: none;">
+        <table>
+            <tr>
+                <th>Attribute</th>
+                <th>Value</th>
+            </tr>
+            {{#each @root.actor.class.system.items}}
+                {{#ifCompare this.level @../this}}
+                <tr class="preview_option" data-document-id="{{this.uuid}}" data-comp-name="classfeatures">
+                    <td>Class Feature</td>
+                    <td><em>{{this.name}}</em></td>
+                </tr>
+                {{/ifCompare}}
+            {{/each}}
+            {{#if (contains @root.actor.class.system.ancestryFeatLevels.value this)}}
+                {{#if (hasfeat @root.actor.feats "ancestry" this)}}
+                    <tr class="preview_option" data-document-id="{{getfeatID @root.actor.feats 'ancestry' this}}" data-comp-name="feats-srd">
+                        <td>Ancestry Feat</td>
+                        <td><em>{{getfeatName @root.actor.feats "ancestry" this}}</em></td>
+                    </tr>
+                {{else}}
+                    <tr class="pick-new-feat-select" data-id="{{this}}" data-filter="feattype-ancestry,{{getAncestryTraits @root.actor}}" data-level="{{this}}">
+                        <div>
+                            <td>Ancestry Feat</td>
+                            <td class="drag-handle" data-category-id="ancestry" data-slot-id="{{this}}">
+                                <b data-category-id="ancestry" data-slot-id="{{this}}">Drag Ancestry Feat here</b>
+                            </td>
+                        </div>
+                    </tr>
+                {{/if}}
+            {{/if}}
+            {{#if (contains @root.actor.class.system.classFeatLevels.value this)}}
+                {{#if (hasfeat @root.actor.feats "class" this)}}
+                    <tr class="preview_option" data-document-id="{{getfeatID @root.actor.feats 'class' this}}" data-comp-name="feats-srd">
+                        <td>Class Feat</td>
+                        <td><em>{{getfeatName @root.actor.feats "class" this}}</em></td>
+                    </tr>
+                {{else}}
+                    <tr class="pick-new-feat-select" data-id="{{this}}" data-filter="feattype-class,feattype-archetype,traits-{{@root.actor.system.details.class.trait}}" data-level="{{this}}">
+                        <a href="#">
+                            <td>Class Feat</td>
+                            <td class="drag-handle" data-category-id="class" data-slot-id="{{this}}">
+                                <b data-category-id="class" data-slot-id="{{this}}">Drag Class Feat here</b>
+                            </td>
+                        </a>
+                    </tr>
+                {{/if}}
+            {{/if}}
+            {{#if (contains @root.actor.class.system.classFeatLevels.value this)}}
+                {{#if (gt this 1)}}
+                    {{#if (hasfeat @root.actor.feats "archetype" this)}}
+                        <tr class="preview_option" data-document-id="{{getfeatID @root.actor.feats 'archetype' this}}" data-comp-name="feats-srd">
+                            <td>Archetype Feat</td>
+                            <td><em>{{getfeatName @root.actor.feats "archetype" this}}</em></td>
+                        </tr>
+                    {{else}}
+                        <tr class="pick-new-feat-select" data-id="{{this}}" data-filter="feattype-archetype,feattype-skill,traits-archetype" data-level="{{this}}">
+                            <a href="#">
+                                <td>Archetype Feat</td>
+                                <td class="drag-handle" data-category-id="archetype" data-slot-id="{{this}}">
+                                    <b data-category-id="archetype" data-slot-id="{{this}}">Drag Archetype Feat here</b>
+                                </td>
+                            </a>
+                        </tr>
+                    {{/if}}
+                {{/if}}
+            {{/if}}
+            {{#if (contains @root.actor.class.system.generalFeatLevels.value this)}}
+                {{#if (hasfeat @root.actor.feats "general" this)}}
+                    <tr class="preview_option" data-document-id="{{getfeatID @root.actor.feats 'general' this}}" data-comp-name="feats-srd">
+                        <td>General Feat</td>
+                        <td><em>{{getfeatName @root.actor.feats "general" this}}</em></td>
+                    </tr>
+                {{else}}
+                    <tr class="pick-new-feat-select" data-id="{{this}}" data-filter="feattype-general,feattype-skill" data-level="{{this}}">
+                        <a href="#">
+                            <td>General Feat</td>
+                            <td class="drag-handle" data-category-id="general" data-slot-id="{{this}}">
+                                <b data-category-id="general" data-slot-id="{{this}}">Drag General Feat here</b>
+                            </td>
+                        </a>
+                    </tr>
+                {{/if}}
+            {{/if}}
+            {{#if (contains @root.actor.class.system.skillFeatLevels.value this)}}
+                {{#if (hasfeat @root.actor.feats "skill" this)}}
+                    <tr class="preview_option" data-document-id="{{getfeatID @root.actor.feats 'skill' this}}" data-comp-name="feats-srd">
+                        <td>Skill Feat</td>
+                        <td><em>{{getfeatName @root.actor.feats "skill" this}}</em></td>
+                    </tr>
+                {{else}}
+                    <tr class="pick-new-feat-select"  data-category-id="skill" data-slot-id="{{this}}" data-id="{{this}}" data-filter="feattype-skill" data-level="{{this}}">
+                        <a href="#">
+                            <td>Skill Feat</td>
+                            <td class="drag-handle" data-category-id="skill" data-slot-id="{{this}}">
+                                <b data-category-id="skill" data-slot-id="{{this}}">Drag Skill Feat here</b>
+                            </td>
+                        </a>
+                    </tr>
+                {{/if}} 
+            {{/if}}
+            {{#if (contains @root.actor.class.system.skillIncreaseLevels.value this)}}
+            <tr>
+                <td>Pick a Skill Increase</td>
+                <td>
+                    <select>
+                        {{#each @root.actor.system.skills}}
+                        <option value="{{this.slug}}">{{this.slug}} {{this.breakdown}}</option>
+                        {{/each}}
+                    </select>
+                </td>
+            </tr>
+            {{/if}}
+            {{#if (contains @root.ability_boosts this)}}
+            <tr>
+                <td>Ability Boost!</td>
+                <td class="select_ability_boosts"><em>Pick Ability Boosts for Level {{this}}<em></td>
+            </tr>
+            {{/if}}
+        </table>
+    </section>
+    {{/each}}
+    <!-- {{#if (hasSpellCasting @root.actor)}}
+    <button type="button" class="add_spellcasting">Manage Spellcasting</button>
+    {{/if}}
+    <button type="button" class="save_builder_changes">Save Changes</button> -->
+</section>

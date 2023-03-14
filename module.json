@@ -1,0 +1,31 @@
+{
+  "name": "kiwooki-character-builder",
+  "title": "Kiwooki's PF2e Character Builder",
+  "description": "PF2e module to help with character building",
+  "authors": [
+    {
+      "name": "Kiwooki"
+    }
+  ],
+  "version": "1.0.0",
+  "compatibility": {
+    "minimum": "9",
+    "verified": "10"
+  },
+  "esmodules": [
+    "./kiwooki-character-builder.js"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "languages/en.json"
+    }
+  ],
+  "styles": [
+    "styles/character-builder.css"
+  ],
+  "url": "https://https://github.com/Kiwooki/kiwooki-character-builder",
+  "manifest": "https://raw.githubusercontent.com/Kiwooki/kiwooki-character-builder/develop/module.json",  
+  "download": "https://github.com/Kiwooki/kiwooki-character-builder/archive/refs/heads/develop.zip"
+}

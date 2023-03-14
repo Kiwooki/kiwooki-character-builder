@@ -1,0 +1,38 @@
+/* Character Creator Button */
+.character-creator-button {
+  background: transparent;
+  padding: 0;
+  color: white;
+  line-height: normal;
+  border: 0;
+  align-self: center;
+}
+
+.level-accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+.level-active, .level-accordion:hover {
+  background-color: #ccc;
+}
+
+.level-accordion:after {
+  content: '\002B';
+  color: #777;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.level-active:after {
+  content: "\2212";
+}

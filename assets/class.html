@@ -1,0 +1,48 @@
+<section class="sheet-body">
+    <h3>Class</h3>
+    <button class="open_compendium" data-comp-name="pf2e.classes" data-opt-type="Class" type="button">Pick Class</button>    
+    <button type="button" class="level-accordion">Summary - Class: {{@root.actor.class.name}}</button>
+    <section style="display: none;">
+        <table>
+            <tr>
+                <th>Attribute</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Class HP</td>
+                <td>{{@root.actor.class.system.hp}}</td>
+            </tr>
+            <tr>
+                <td>Key Ability Options</td>
+                <td>
+                    <select>
+                        {{#each @root.actor.class.system.keyAbility.value}}
+                        <option value="{{this}}">{{this}}</option>
+                        {{/each}}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Ancestry Feat Levels</td>
+                <td>{{@root.actor.class.system.ancestryFeatLevels.value}}</td>
+            </tr>
+            <tr>
+                <td>Class Feat Levels</td>
+                <td>{{@root.actor.class.system.classFeatLevels.value}}</td>
+            </tr>
+            <tr>
+                <td>General Feat Levels</td>
+                <td>{{@root.actor.class.system.generalFeatLevels.value}}</td>
+            </tr>
+            <tr>
+                <td>Skill Feat Levels</td>
+                <td>{{@root.actor.class.system.skillFeatLevels.value}}</td>
+            </tr>
+            <tr>
+                <td>Skill Increase Levels</td>
+                <td>{{@root.actor.class.system.skillIncreaseLevels.value}}</td>
+            </tr>
+        </table>
+        {{{enrichHTML @root.actor.class.system.description.value}}}
+    </section>
+</section>

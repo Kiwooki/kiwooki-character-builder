@@ -1,0 +1,35 @@
+<form>
+  <section class="sheet-content" style="display: flex;">
+    <section class="sheet-body" style="flex: 1 1 0;">
+      <!-- SHEET NAVIGATION -->
+      <nav class="tabs" data-group="primary-tabs">
+        <img class="logo" src="systems/pf2e/assets/pathfinder_logo.webp" height="56" alt="" srcset="" style="border: 0;">
+        {{#each tabs}}
+        <a class="item" data-tab="{{label}}"><i class="fas fa-dice-d20"></i> {{title}}</a>
+        {{/each}}
+      </nav>
+    
+      <!-- BODY -->
+      <section class="content flexrow">
+        {{#each tabs}}
+        <section class="tab compendium directory" data-tab="{{label}}" data-group="primary-tabs">
+          {{#if settings}}
+            {{> 'modules/handy-hints/assets/settings.html' this}}
+          {{else if ancestry}}
+            {{> 'modules/handy-hints/assets/ancestry.html' this}}
+          {{else if heritage}}
+            {{> 'modules/handy-hints/assets/heritage.html' this}}
+          {{else if background}}
+            {{> 'modules/handy-hints/assets/background.html' this}}
+          {{else if class}}
+            {{> 'modules/handy-hints/assets/class.html' this}}
+          {{else if builder}}
+            {{> 'modules/handy-hints/assets/builder.html' this}}
+          {{/if}}
+        </section>
+        {{/each}}
+      </section>
+
+    </section>
+  </section>
+</form>

@@ -1,0 +1,29 @@
+<section class="sheet-body">
+    <h3>Background</h3>
+
+    <button class="open_compendium" data-comp-name="pf2e.backgrounds" data-opt-type="Background" type="button">Pick Background</button>
+
+    <!-- Background Summary -->
+    <button type="button" class="level-accordion">Summary - Background: {{@root.actor.background.name}}</button>
+    <section style="display: none;">
+        {{{enrichHTML @root.actor.heritage.system.description.value}}}
+        <table>
+            <tr>
+                <th>Attribute</th>
+                <th>Value</th>
+            </tr>
+            {{#each @root.actor.background.system.boosts}}
+            <tr>
+                <td>Provided Boost Options</td>
+                <td>
+                    <select>
+                        {{#each this.value}}
+                        <option value="{{this}}">{{this}}</option>
+                        {{/each}}
+                    </select>
+                </td>
+            </tr>
+            {{/each}}
+        </table>
+    </section>
+</section>

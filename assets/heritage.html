@@ -1,0 +1,18 @@
+<section class="sheet-body">
+    {{#each heritages}}
+    <section class="flexrow heritage-row" data-document-id={{this._id}} title="{{this.name}}" style="border: 1px solid;" draggable="true">
+        <div class="flexcol">
+            <button class="heritage-selected" type="button" doc-id="{{this._id}}">
+                <img class="thumbnail" style="width: 50%; border: 0;" src={{this.img}}>
+            </button>
+        </div>
+        <div style="display: block">
+            <table>
+                <tr>
+                    <th>{{this.name}}</th>
+                </tr>
+            </table>
+        </div>
+    </section>
+    {{/each}}
+</section>
