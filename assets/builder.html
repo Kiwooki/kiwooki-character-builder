@@ -18,9 +18,12 @@
             {{/each}}
             {{#if (contains @root.actor.class.system.ancestryFeatLevels.value this)}}
                 {{#if (hasfeat @root.actor.feats "ancestry" this)}}
-                    <tr class="preview_option" data-document-id="{{getfeatID @root.actor.feats 'ancestry' this}}" data-comp-name="feats-srd">
+                    <tr class="preview_option" data-document-id="{{getfeatSourceID @root.actor.feats 'ancestry' this}}" data-comp-name="feats-srd" data-item-id="{{getfeatItemID @root.actor.feats 'ancestry' this}}" >
                         <td>Ancestry Feat</td>
                         <td><em>{{getfeatName @root.actor.feats "ancestry" this}}</em></td>
+                        <td>
+                            <button class="remove_feat" type="button">Remove Ancestry Feat</button>
+                        </td>
                     </tr>
                 {{else}}
                     <tr class="pick-new-feat-select" data-id="{{this}}" data-filter="feattype-ancestry,{{getAncestryTraits @root.actor}}" data-level="{{this}}">
@@ -35,9 +38,12 @@
             {{/if}}
             {{#if (contains @root.actor.class.system.classFeatLevels.value this)}}
                 {{#if (hasfeat @root.actor.feats "class" this)}}
-                    <tr class="preview_option" data-document-id="{{getfeatID @root.actor.feats 'class' this}}" data-comp-name="feats-srd">
+                    <tr class="preview_option" data-document-id="{{getfeatSourceID @root.actor.feats 'class' this}}" data-comp-name="feats-srd" data-item-id="{{getfeatItemID @root.actor.feats 'class' this}}" >
                         <td>Class Feat</td>
                         <td><em>{{getfeatName @root.actor.feats "class" this}}</em></td>
+                        <td>
+                            <button class="remove_feat"  type="button">Remove Class Feat</button>
+                        </td>
                     </tr>
                 {{else}}
                     <tr class="pick-new-feat-select" data-id="{{this}}" data-filter="feattype-class,feattype-archetype,traits-{{@root.actor.system.details.class.trait}}" data-level="{{this}}">
@@ -53,9 +59,12 @@
             {{#if (contains @root.actor.class.system.classFeatLevels.value this)}}
                 {{#if (gt this 1)}}
                     {{#if (hasfeat @root.actor.feats "archetype" this)}}
-                        <tr class="preview_option" data-document-id="{{getfeatID @root.actor.feats 'archetype' this}}" data-comp-name="feats-srd">
+                        <tr class="preview_option" data-document-id="{{getfeatSourceID @root.actor.feats 'archetype' this}}" data-comp-name="feats-srd" data-item-id="{{getfeatItemID @root.actor.feats 'archetype' this}}" >
                             <td>Archetype Feat</td>
                             <td><em>{{getfeatName @root.actor.feats "archetype" this}}</em></td>
+                            <td>
+                                <button class="remove_feat"  type="button">Remove Archetype Feat</button>
+                            </td>
                         </tr>
                     {{else}}
                         <tr class="pick-new-feat-select" data-id="{{this}}" data-filter="feattype-archetype,feattype-skill,traits-archetype" data-level="{{this}}">
@@ -71,9 +80,12 @@
             {{/if}}
             {{#if (contains @root.actor.class.system.generalFeatLevels.value this)}}
                 {{#if (hasfeat @root.actor.feats "general" this)}}
-                    <tr class="preview_option" data-document-id="{{getfeatID @root.actor.feats 'general' this}}" data-comp-name="feats-srd">
+                    <tr class="preview_option" data-document-id="{{getfeatSourceID @root.actor.feats 'general' this}}" data-comp-name="feats-srd" data-item-id="{{getfeatItemID @root.actor.feats 'general' this}}" >
                         <td>General Feat</td>
                         <td><em>{{getfeatName @root.actor.feats "general" this}}</em></td>
+                        <td>
+                            <button class="remove_feat"  type="button">Remove General Feat</button>
+                        </td>
                     </tr>
                 {{else}}
                     <tr class="pick-new-feat-select" data-id="{{this}}" data-filter="feattype-general,feattype-skill" data-level="{{this}}">
@@ -88,9 +100,12 @@
             {{/if}}
             {{#if (contains @root.actor.class.system.skillFeatLevels.value this)}}
                 {{#if (hasfeat @root.actor.feats "skill" this)}}
-                    <tr class="preview_option" data-document-id="{{getfeatID @root.actor.feats 'skill' this}}" data-comp-name="feats-srd">
+                    <tr class="preview_option" data-document-id="{{getfeatSourceID @root.actor.feats 'skill' this}}" data-comp-name="feats-srd" data-item-id="{{getfeatItemID @root.actor.feats 'skill' this}}" >
                         <td>Skill Feat</td>
                         <td><em>{{getfeatName @root.actor.feats "skill" this}}</em></td>
+                        <td>
+                            <button class="remove_feat"  type="button">Remove Skill Feat</button>
+                        </td>
                     </tr>
                 {{else}}
                     <tr class="pick-new-feat-select"  data-category-id="skill" data-slot-id="{{this}}" data-id="{{this}}" data-filter="feattype-skill" data-level="{{this}}">
@@ -104,7 +119,7 @@
                 {{/if}} 
             {{/if}}
             {{#if (contains @root.actor.class.system.skillIncreaseLevels.value this)}}
-            <tr>
+            <tr class="skill-to-train">
                 <td>Pick a Skill Increase</td>
                 <td>
                     <select>
@@ -112,6 +127,9 @@
                         <option value="{{this.slug}}">{{this.slug}} {{this.breakdown}}</option>
                         {{/each}}
                     </select>
+                </td>
+                <td>
+                    <button class="train_skill" type="button">Upgrade Skill</button>
                 </td>
             </tr>
             {{/if}}
@@ -124,8 +142,8 @@
         </table>
     </section>
     {{/each}}
-    <!-- {{#if (hasSpellCasting @root.actor)}}
-    <button type="button" class="add_spellcasting">Manage Spellcasting</button>
+    {{#if (hasSpellCasting @root.actor)}}
+    <button type="button" class="add_spellcasting">Add/Update Class Spellcasting</button>
     {{/if}}
-    <button type="button" class="save_builder_changes">Save Changes</button> -->
+    <!-- <button type="button" class="save_builder_changes">Save Changes</button> -->
 </section>

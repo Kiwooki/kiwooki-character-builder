@@ -105,7 +105,7 @@ export class Utils {
             }
             return "FEAT NAME FOUND"
         });
-        Handlebars.registerHelper('getfeatID', function(character_feats, category, level, options) {
+        Handlebars.registerHelper('getfeatItemID', function(character_feats, category, level, options) {
             if(!character_feats || !category || !level)
             {
                 return "BLANK"
@@ -121,7 +121,28 @@ export class Utils {
                 Utils.logger(feat)
                 if(feat.level == level && feat?.feat)
                 {
-                return feat.feat.sourceId // .id only returns the ITEM Id not the Source ID for compendium lookup
+                    return feat.feat.id // .id only returns the ITEM Id not the Source ID for compendium lookup
+                }
+            }
+            return "FEAT ID FOUND"
+        });
+        Handlebars.registerHelper('getfeatSourceID', function(character_feats, category, level, options) {
+            if(!character_feats || !category || !level)
+            {
+                return "BLANK"
+            }
+            const feat_category = character_feats.get(category)
+            if(!feat_category?.feats)
+            {
+                Utils.logger("feats not found for category: " + category)
+                return "FEAT NOT FOUND"
+            }
+            for( const feat of feat_category.feats )
+            {
+                Utils.logger(feat)
+                if(feat.level == level && feat?.feat)
+                {
+                    return feat.feat.sourceId // .id only returns the ITEM Id not the Source ID for compendium lookup
                 }
             }
             return "FEAT ID FOUND"
